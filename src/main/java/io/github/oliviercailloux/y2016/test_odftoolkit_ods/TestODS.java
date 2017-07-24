@@ -1,9 +1,11 @@
-package io.github.oliviercailloux.y2016.test_ods;
+package io.github.oliviercailloux.y2016.test_odftoolkit_ods;
 
 import java.io.InputStream;
 
 import org.odftoolkit.simple.SpreadsheetDocument;
 import org.odftoolkit.simple.table.Cell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simplified from <a href=
@@ -14,6 +16,9 @@ import org.odftoolkit.simple.table.Cell;
  *
  */
 public class TestODS {
+	@SuppressWarnings("unused")
+	private static final Logger LOGGER = LoggerFactory.getLogger(TestODS.class);
+
 	public static void main(String[] args) throws Exception {
 		new TestODS().generateSpreadsheetDocument();
 	}
@@ -22,7 +27,7 @@ public class TestODS {
 		try (InputStream inputStream = TestODS.class.getResourceAsStream("demo9_data.ods");
 				SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument(inputStream)) {
 			Cell positionCell = spreadsheetDoc.getTableByName("B").getCellByPosition("E1");
-			System.out.println(positionCell.getDisplayText());
+			LOGGER.info("Found: {}.", positionCell.getDisplayText());
 			positionCell.setStringValue("ploum");
 			spreadsheetDoc.save("demo9s.ods");
 		}
