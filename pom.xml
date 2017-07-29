@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.oliviercailloux.y2016</groupId>
 	<artifactId>test-odftoolkit-ods</artifactId>
+	<name>Test ODFToolkit-ODS</name>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +22,10 @@
 			<artifactId>simple-odf</artifactId>
 			<version>0.8.2-incubating</version>
 			<exclusions>
+				<exclusion>
+					<groupId>com.sun</groupId>
+					<artifactId>tools</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-log4j12</artifactId>
