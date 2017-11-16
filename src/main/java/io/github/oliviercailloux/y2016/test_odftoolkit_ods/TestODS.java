@@ -3,10 +3,7 @@ package io.github.oliviercailloux.y2016.test_odftoolkit_ods;
 import java.io.InputStream;
 
 import org.odftoolkit.simple.SpreadsheetDocument;
-import org.odftoolkit.simple.style.Border;
-import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.table.Cell;
-import org.odftoolkit.simple.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,61 +20,16 @@ public class TestODS {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TestODS.class);
 
 	public static void main(String[] args) throws Exception {
-		final TestODS testODS = new TestODS();
-		testODS.readBordersIAE();
+		new TestODS().generateSpreadsheetDocument();
 	}
 
-	public void readBordersIAE() throws Exception {
-		LOGGER.debug("Reading.");
-		try (InputStream inputStream = TestODS.class.getResourceAsStream("IAE.ods");
+	public void generateSpreadsheetDocument() throws Exception {
+		try (InputStream inputStream = TestODS.class.getResourceAsStream("demo9_data.ods");
 				SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument(inputStream)) {
-			LOGGER.debug("Read.");
-			final Table table = spreadsheetDoc.getTableByName("Table");
-			final Cell a1Cell = table.getCellByPosition("A1");
-			LOGGER.info("Found: {}.", a1Cell.getDisplayText());
-			final Cell borderCell = table.getCellByPosition("F4");
-			final Border left = borderCell.getStyleHandler().getBorder(CellBordersType.LEFT);
-			LOGGER.info("Border left: {}.", left);
-			final Border borderBottomLeft = borderCell.getStyleHandler().getBorder(CellBordersType.DIAGONALBLTR);
-			LOGGER.info("Border bottom left: {}.", borderBottomLeft);
-			final Border borderTopLeft = borderCell.getStyleHandler().getBorder(CellBordersType.DIAGONALTLBR);
-			LOGGER.info("Border top left: {}.", borderTopLeft);
-		}
-	}
-
-	public void readBordersNFE() throws Exception {
-		LOGGER.debug("Reading.");
-		try (InputStream inputStream = TestODS.class.getResourceAsStream("NFE.ods");
-				SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument(inputStream)) {
-			LOGGER.debug("Read.");
-			final Table table = spreadsheetDoc.getTableByName("L3_Informatique");
-			final Cell a1Cell = table.getCellByPosition("A1");
-			LOGGER.info("Found: {}.", a1Cell.getDisplayText());
-			final Cell borderCell = table.getCellByPosition("F4");
-			final Border left = borderCell.getStyleHandler().getBorder(CellBordersType.LEFT);
-			LOGGER.info("Border left: {}.", left);
-			final Border borderBottomLeft = borderCell.getStyleHandler().getBorder(CellBordersType.DIAGONALBLTR);
-			LOGGER.info("Border bottom left: {}.", borderBottomLeft);
-			final Border borderTopLeft = borderCell.getStyleHandler().getBorder(CellBordersType.DIAGONALTLBR);
-			LOGGER.info("Border top left: {}.", borderTopLeft);
-		}
-	}
-
-	public void readBordersNPE() throws Exception {
-		LOGGER.debug("Reading.");
-		try (InputStream inputStream = TestODS.class.getResourceAsStream("NPE.ods");
-				SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument(inputStream)) {
-			LOGGER.debug("Read.");
-			final Table table = spreadsheetDoc.getTableByName("Table");
-			final Cell a1Cell = table.getCellByPosition("A1");
-			LOGGER.info("Found: {}.", a1Cell.getDisplayText());
-			final Cell borderCell = table.getCellByPosition("F4");
-			final Border left = borderCell.getStyleHandler().getBorder(CellBordersType.LEFT);
-			LOGGER.info("Border left: {}.", left);
-			final Border borderBottomLeft = borderCell.getStyleHandler().getBorder(CellBordersType.DIAGONALBLTR);
-			LOGGER.info("Border bottom left: {}.", borderBottomLeft);
-			final Border borderTopLeft = borderCell.getStyleHandler().getBorder(CellBordersType.DIAGONALTLBR);
-			LOGGER.info("Border top left: {}.", borderTopLeft);
+			Cell positionCell = spreadsheetDoc.getTableByName("B").getCellByPosition("E1");
+			LOGGER.info("Found: {}.", positionCell.getDisplayText());
+			positionCell.setStringValue("ploum");
+			spreadsheetDoc.save("demo9s.ods");
 		}
 	}
 }
