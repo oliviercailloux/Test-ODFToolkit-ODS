@@ -10,14 +10,6 @@ import org.odftoolkit.simple.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Simplified from <a href=
- * "https://incubator.apache.org/odftoolkit/simple/demo/demo9.html">odftoolkit
- * doc</a>.
- *
- * @author Olivier Cailloux
- *
- */
 public class TestODS {
 	@SuppressWarnings("unused")
 	private static final Logger LOGGER = LoggerFactory.getLogger(TestODS.class);
